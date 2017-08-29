@@ -1,0 +1,24 @@
+<div class="p-3">
+    <div *ngIf="conf.showNavigationBar">
+    <ul *ngIf="conf.navigateByTabName" class="nav" [ngClass]="{'nav-tabs-vert':vertical,'nav-tabs':!vertical}">
+        <li *ngFor="let tab of tabList" (click)="selectTab(tab)" [class.active]="tab.active">
+            <!--<li *ngFor="let tab of tabList" [class.active]="tab.active" *ngIf="!conf.navigateByTabName">-->
+            <a>{{tab.title}}</a>
+        </li>
+    </ul>
+
+    <ul *ngIf="!conf.navigateByTabName" class="nav" [ngClass]="{'nav-tabs-vert':vertical,'nav-tabs':!vertical}">
+        <li *ngFor="let tab of tabList" [class.active]="tab.active">
+            <a>{{tab.title}}</a>
+        </li>
+    </ul>
+    </div>
+    <div class="p-3" [ngClass]="{'nav-tabs-vert-content':vertical}">
+        <ng-content></ng-content>
+    </div>
+    <div class="p-3" [ngClass]="{'nav-tabs-vert-buttons':vertical}">
+        <button type="button" class="btn btn-primary col-md-2 btn-flat" (click)="gotoBack()" *ngIf="showBackButton" [disabled]="activeTab.disableBack">Back</button>
+        <button type="button" class="btn btn-primary col-md-2 pull-right btn-flat" (click)="gotoNext()" *ngIf="showNextButton" [disabled]="activeTab.disableNext">Next</button>
+        <button type="button" class="btn btn-primary col-md-2 pull-right btn-flat" (click)="onSubmitFn()" *ngIf="showSubmitButton" [disabled]="disableSubmit">Submit</button>
+    </div>
+</div>
